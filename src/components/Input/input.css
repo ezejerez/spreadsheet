@@ -1,0 +1,9 @@
+input {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  background: #262626;
+  border: 1px solid #fff3;
+  color: #fff;
+  outline: none;
+}
