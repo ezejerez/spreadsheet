@@ -5,6 +5,10 @@ export default function Input() {
 
   const [inputValue, setInputValue] = useState('')
 
+  function splitInputValue(inputValue){
+    return inputValue.split('+')
+  }
+
   function inputResult(){
     return 
   }
