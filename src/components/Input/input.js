@@ -1,24 +1,48 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import './input.css';
 
 export default function Input() {
+  const [inputValue, setInputValue] = useState('');
 
-  const [inputValue, setInputValue] = useState('')
-
-  function splitInputValue(inputValue){
-    return inputValue.split('+')
+  function splitIntoNumbers(value) {
+    return value.split(/\+|-/g).map((n) => parseFloat(n));
   }
 
-  function inputResult(){
-    return 
+  function splitIntoOperators(value) {
+    return value.split(/(?!\+$)(?!-$)[0-9]+/g).filter((x) => x);
   }
 
   function keyPress(e) {
-    if (e.keyCode === 13){
-       console.log('value', e.target.value);
-       // put the login here
-    }
- }
+    if (e.keyCode === 13) {
+      const numbers = splitIntoNumbers(e.target.value);
+      const operators = splitIntoOperators(e.target.value);
 
-  return <input onKeyDown={keyPress} onChange={event => setInputValue(event.target.value)}/>;
+      let result = numbers[0];
+      numbers.forEach((n, i) => {
+        const count = operators[i - 1];
+
+        // eslint-disable-next-line default-case
+        switch (count) {
+          case '+': {
+            result += n;
+            break;
+          }
+          case '-': {
+            result -= n;
+            break;
+          }
+        }
+      });
+
+      setInputValue(result);
+    }
+  }
+
+  return (
+    <input
+      onKeyDown={keyPress}
+      onChange={(event) => setInputValue(event.target.value)}
+      value={inputValue}
+    />
+  );
 }

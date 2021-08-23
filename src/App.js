@@ -3,14 +3,6 @@ import Logo from './img/Logo.svg';
 import Table from './components/Table/table';
 
 function App() {
-  function add(cell) {
-    return cell + cell;
-  }
-
-  function subtract(cell) {
-    return cell - cell;
-  }
-
   return (
     <>
       <div className='navbar'>
@@ -24,7 +16,7 @@ function App() {
         </div>
       </div>
 
-      <Table onAddButton={add} onSubtractButton={subtract} />
+      <Table />
     </>
   );
 }
